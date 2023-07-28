@@ -1,6 +1,8 @@
 # Bundle Multiplexer using Nymphe
 
-Built using [Nymphe](https://github.com/0xTaker/nymphe). A JSON-RPC web server that forwards searcher bundles to various builders that support `eth_sendBundle`.
+A JSON-RPC web server that forwards searcher bundles to various builders that support `eth_sendBundle`.
+
+Built using [Nymphe](https://github.com/0xTaker/nymphe).
 ## Build and Run
 
 To install the necessary dependencies:
