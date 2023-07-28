@@ -1,31 +1,19 @@
-# Nymphe (TypeScript) - Boilerplate for JSON-RPC Web Applications
+# Bundle Multiplexer using Nymphe
 
-Nymphe is a boilerplate that standardises the development of web-based JSON-RPC applications like that of:
-- [Orderflow Auctions](https://frontier.tech/the-orderflow-auction-design-space)
-- [ERC-4337 Bundlers](https://eips.ethereum.org/EIPS/eip-4337)
-- [Block Builders](https://www.titanbuilder.xyz/docs)
-
-...and other RPC-based applications.
-
-A standard interface across Websockets and HTTP and across multiple clients that build on top of this  boilerplate makes it easier for users, dApps, SDKs and searchers to connect and switch between these applications, lowering switching cost.
-
-## Example Use Cases
-
+Built using [Nymphe](https://github.com/0xTaker/nymphe). A JSON-RPC web server that forwards searcher bundles to various builders that support `eth_sendBundle`.
 ## Build and Run
-
-You can use this template by going to this repository's [GitHub page](https://github.com/0xTaker/nymphe) and clicking on the `Use this template` button.
 
 To install the necessary dependencies:
 ```
 yarn
 ```
 
-This template may require a set of environment variables to configure, which can be made accessable via the `.env` file. An examplar can be copied from the provided `.env.example`. Currently, this template consists of simply:
+This repository requires a set of environment variables to configure, that can be found inside of `.env.example`. Currently, this repo consists of simply:
 ```
 PORT=3000
 CHAIN_ID=0x1
 ```
-Additional environment variables can be added and accessed within the code using `process.env.<ENV_NAME>` such as `process.env.CHAIN_ID`.
+Copy the contents of `.env.example` into a new file `.env`. Additional environment variables can be added and accessed within the code using `process.env.<ENV_NAME>` such as `process.env.CHAIN_ID`.
 
 In order to build and start the application:
 ```
