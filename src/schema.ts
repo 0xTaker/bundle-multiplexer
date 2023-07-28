@@ -5,7 +5,7 @@ import z from "zod";
                             UTILS
 //////////////////////////////////////////////////////////////*/
 
-export type RpcMethodHandler<T> = (params: T) => Promise<JsonRpcResult | JsonRpcError>;
+export type RpcMethodHandler<T> = (id: number, params: T) => Promise<JsonRpcResult | JsonRpcError>;
 export const zAddress = z.string().startsWith("0x").length(42).regex(/[0-9A-z]/g);
 
 /*//////////////////////////////////////////////////////////////
@@ -14,7 +14,8 @@ export const zAddress = z.string().startsWith("0x").length(42).regex(/[0-9A-z]/g
 
 // EDIT: ADD MORE METHODS
 export const RPCSupportedMethodsEnum = z.enum([
-    "eth_chainId"
+    "eth_chainId",
+    "eth_sendBundle"
 ]);
 
 export type RPCSupportedMethods = z.infer<typeof RPCSupportedMethodsEnum>;
@@ -34,4 +35,28 @@ export type RPCInput = z.infer<typeof RPCInputSchema>;
 export const zChainIdParams = z.void();
 export type chainIdParams = z.infer<typeof zChainIdParams>;
 
-// EDIT: ADD MORE HANDLERS
+export const zEth_transaction = z.object({
+    hash: z.string().optional(),
+    from: z.string().optional(),
+    to: z.string().optional(),
+    value: z.bigint().optional(),
+    data: z.string(),
+    chainId: z.number().nonnegative(),
+    maxFeePerGas: z.bigint().nonnegative().optional(),
+    maxPriorityFeePerGas: z.bigint().nonnegative().optional(),
+    gasLimit: z.bigint().optional(),
+    gasPrice: z.bigint().optional()
+})
+
+export const zEth_sendBundleParams = z.object({
+    txs: z.array(z.string().or(zEth_transaction)),
+    blockNumber: z.string().optional(),
+    minTimestamp: z.number().optional(),
+    maxTimestamp: z.number().optional(),
+    replacementUuid: z.string().optional(),
+
+    // RefundRecipient
+    refundRecipient: z.string().optional(),
+    refundIndex: z.number().optional()
+});
+export type eth_sendBundleParams = z.infer<typeof zEth_sendBundleParams>;
